@@ -1,3 +1,5 @@
+import { imgMap } from "../util";
+
 interface IControlButton {
   onClick: () => void;
   children: React.ReactNode;
@@ -5,7 +7,7 @@ interface IControlButton {
 
 const ControlButton = (props: IControlButton): JSX.Element => {
   return (
-    <div className="bg-white h-6 w-8 text-center m-1 cursor-pointer hover:bg-cyan-300" onClick={props.onClick}>
+    <div className="bg-white h-8 w-8 text-center m-1 cursor-pointer hover:bg-cyan-300" onClick={props.onClick}>
       {props.children}
     </div>
   );
@@ -20,7 +22,7 @@ export const SudokuControls = (props: SudokuControlsProps) => {
     <div className="flex flex-wrap">
       {[..."123456789"].map((num) => (
         <ControlButton key={num} onClick={() => props.onControlClick(Number(num))}>
-          {num}
+          <img src={imgMap[Number(num)]} alt={num} />
         </ControlButton>
       ))}
       <ControlButton

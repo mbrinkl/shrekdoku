@@ -1,15 +1,10 @@
 import { Difficulty } from "sudoku-core";
+import { Link } from "@tanstack/react-router";
 import { Fireworks } from "@fireworks-js/react";
 import { useSudokuBoard } from "../hooks/useSudokuBoard";
-import { SudokuCell } from "./SudokuCell";
 import { SudokuControls } from "./SudokuControls";
-import { Link } from "@tanstack/react-router";
-
-export interface Cell {
-  currValue: number | null;
-  solutionValue: number;
-  isEditable: boolean;
-}
+import { SudokuBoard } from "./SudokuBoard";
+import { SudokuLoading } from "./SudokuLoading";
 
 interface SudokuBoardProps {
   difficulty: Difficulty;
@@ -18,33 +13,22 @@ interface SudokuBoardProps {
 export const SudokuGame = (props: SudokuBoardProps): JSX.Element => {
   const { board, selectedIndex, status, actions } = useSudokuBoard(props.difficulty);
 
-  return !board ? (
-    <div className="text-white font-bold text-lg">Loading...</div>
-  ) : (
-    <div>
-      <div
-        className="w-56 bg-gray-500 grid"
-        style={{
-          gridTemplateRows: "1fr 1fr 1.1fr 1fr 1fr 1.1fr 1fr 1fr 1fr",
-          gridTemplateColumns: "1fr 1fr 1.1fr 1fr 1fr 1.1fr 1fr 1fr 1fr",
-          padding: "1px",
-        }}
-      >
-        {board.map((cell, index) => (
-          <SudokuCell
-            key={index}
-            cell={cell}
-            index={index}
-            selectedIndex={selectedIndex}
-            setSelectedIndex={actions.setSelectedIndex}
-          />
-        ))}
+  return (
+    <div className="h-dvh w-dvw">
+      <div className="h-full flex flex-col justify-center items-center">
+        <Link className="text-white font-bold text-lg absolute top-3 left-3" to="/">
+          Exit
+        </Link>
+        {!board ? (
+          <SudokuLoading />
+        ) : (
+          <>
+            <SudokuBoard board={board} selectedIndex={selectedIndex} setSelectedIndex={actions.setSelectedIndex} />
+            {status === "success" && <Fireworks autostart={true} />}
+            <SudokuControls onControlClick={actions.updateSelectedCellValue} />
+          </>
+        )}
       </div>
-      {status === "success" && <Fireworks autostart={true} />}
-      <SudokuControls onControlClick={actions.updateSelectedCellValue} />
-      <Link className="text-white font-bold text-lg" to="/">
-        Exit
-      </Link>
     </div>
   );
 };

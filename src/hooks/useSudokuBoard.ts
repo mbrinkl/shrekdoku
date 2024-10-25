@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { Board, Difficulty } from "sudoku-core";
-import { Cell } from "../components/SudokuGame";
+import { Cell } from "../types";
 import GenWorker from "../GenWorker?worker";
 
 export type Status = "in-progress" | "success" | "failure";
@@ -22,11 +22,12 @@ export const useSudokuBoard = (difficulty: Difficulty): Retv => {
 
   const updateSelectedCellValue = useCallback(
     (value: number | null) => {
+      if (!board || !board[selectedIndex].isEditable) return;
       setBoard(
         (prev) => prev?.map((cell, index) => (selectedIndex === index ? { ...cell, currValue: value } : cell)) ?? null,
       );
     },
-    [selectedIndex],
+    [board, selectedIndex],
   );
 
   const handleKeydown = useCallback(
