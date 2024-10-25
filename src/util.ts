@@ -34,9 +34,7 @@ export const computeNextIndex = (index: number, direction: Direction): number =>
   if (direction === "up") {
     return index < 9 ? index + 9 * 8 : index - 9;
   }
-  if (direction === "down") {
-    return index > 9 * 8 - 1 ? index - 9 * 8 : index + 9;
-  }
 
-  return index;
+  // down
+  return index > 9 * 8 - 1 ? index - 9 * 8 : index + 9;
 };
