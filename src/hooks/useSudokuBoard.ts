@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Board, Difficulty } from "sudoku-core";
 import { Cell } from "../types";
 import GenWorker from "../GenWorker?worker";
+import { computeNextIndex } from "../util";
 
 export type Status = "in-progress" | "success" | "failure";
 
@@ -36,6 +37,14 @@ export const useSudokuBoard = (difficulty: Difficulty): Retv => {
         updateSelectedCellValue(null);
       } else if (/^[1-9]$/i.test(e.key)) {
         updateSelectedCellValue(Number(e.key));
+      } else if (e.key === "ArrowLeft") {
+        setSelectedIndex((prev) => computeNextIndex(prev, "left"));
+      } else if (e.key === "ArrowRight") {
+        setSelectedIndex((prev) => computeNextIndex(prev, "right"));
+      } else if (e.key === "ArrowUp") {
+        setSelectedIndex((prev) => computeNextIndex(prev, "up"));
+      } else if (e.key === "ArrowDown") {
+        setSelectedIndex((prev) => computeNextIndex(prev, "down"));
       }
     },
     [updateSelectedCellValue],

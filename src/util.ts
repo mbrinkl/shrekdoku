@@ -8,6 +8,8 @@ import img7 from "./assets/tile007.png";
 import img8 from "./assets/tile010.png";
 import img9 from "./assets/tile013.png";
 
+type Direction = "up" | "down" | "left" | "right";
+
 export const imgMap: Record<number, string> = {
   1: img1,
   2: img2,
@@ -18,4 +20,23 @@ export const imgMap: Record<number, string> = {
   7: img7,
   8: img8,
   9: img9,
+};
+
+export const computeNextIndex = (index: number, direction: Direction): number => {
+  if (index === -1) return index;
+
+  if (direction === "left") {
+    return index % 9 === 0 ? index + 8 : index - 1;
+  }
+  if (direction === "right") {
+    return index % 9 === 8 ? index - 8 : index + 1;
+  }
+  if (direction === "up") {
+    return index < 9 ? index + 9 * 8 : index - 9;
+  }
+  if (direction === "down") {
+    return index > 9 * 8 - 1 ? index - 9 * 8 : index + 9;
+  }
+
+  return index;
 };

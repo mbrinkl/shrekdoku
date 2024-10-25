@@ -24,7 +24,7 @@ export const SudokuBoard = (props: SudokuBoardProps) => {
             cell={cell}
             index={index}
             selectedIndex={props.selectedIndex}
-            selectedValue={props.board[props.selectedIndex].currValue}
+            selectedValue={props.selectedIndex === -1 ? null : props.board[props.selectedIndex].currValue}
             setSelectedIndex={props.setSelectedIndex}
           />
         ))}

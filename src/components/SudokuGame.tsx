@@ -24,6 +24,7 @@ export const SudokuGame = (props: SudokuBoardProps): JSX.Element => {
         ) : (
           <>
             <SudokuBoard board={board} selectedIndex={selectedIndex} setSelectedIndex={actions.setSelectedIndex} />
+            <div className="text-white">{status}</div>
             {status === "success" && <Fireworks autostart={true} />}
             <SudokuControls onControlClick={actions.updateSelectedCellValue} />
           </>

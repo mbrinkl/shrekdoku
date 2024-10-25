@@ -11,21 +11,21 @@ const HomePage = () => {
         Easy
       </Link>
       <Link
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center"
+        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded text-center"
         to="/play"
         search={{ difficulty: "medium" }}
       >
         Medium
       </Link>
       <Link
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center"
+        className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded text-center"
         to="/play"
         search={{ difficulty: "hard" }}
       >
         Hard
       </Link>
       <Link
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center"
+        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-center"
         to="/play"
         search={{ difficulty: "expert" }}
       >
